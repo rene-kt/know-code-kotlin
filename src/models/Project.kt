@@ -2,6 +2,7 @@ package models
 
 class Project {
 	
+	var id: Int = 0;
 	var name: String = ""
 	var language: String = ""
 

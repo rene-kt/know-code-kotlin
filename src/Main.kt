@@ -5,39 +5,43 @@ import services.DevUserService
 
 fun main() {
 
+	val devService: DevUserService = DevUserService()
+			
+	var devLogged: DevUser
 
-	val project: Project = Project("Know-Code", "Kotlin")
-	val project2: Project = Project("TotalCross", "Java")
-	
-	var devUserService: DevUserService = DevUserService();
+	println("Do you wanna log in as a Dev (1) or as a Manager (2)?")
+	var op: Int = readLine()!!.toInt();
 
-
-	val devUser: DevUser = DevUser(1, "teste", 1, ManagerUser(), arrayOf());
-	
-	devUserService.createProject(devUser, project);
-	devUserService.createProject(devUser, project2);
-	
-	
-	for(i in 0..devUser.projects.size - 1){
-		
-		println(devUser.projects.get(i).name)
-		println("index of the projects are: " + devUser.projects.get(i).id)
+	if (op == 1) {
+		devLogged = devService.createDevUser()
+		devPainel(devLogged)
 	}
-	
-	println("---------------------------")
-	
+}
 
-	devUserService.deleteProject(devUser, project.id);
-	
-	val project3: Project = Project("Teste", "Kotlin")
-	devUserService.createProject(devUser, project3);
-		
-	for(i in 0..devUser.projects.size - 1){
-		
-		println(devUser.projects.get(i).name)
-		println("index of the projects are: " + devUser.projects.get(i).id)
+
+
+
+
+
+fun devPainel(devUser: DevUser) {
+	var op: Int = 0;
+	var devService: DevUserService = DevUserService()
+
+	while (op != 4) {
+		println("Create project (1)")
+		println("Delete project (2)")
+		println("See my profile (3)")
+		println("Exit (4)")
+		op = readLine()!!.toInt()
+
+
+		if (op == 1) devService.createProject(devUser)
+		if (op == 2) devService.deleteProject(devUser)
+		if (op == 3) devUser.returnProfile();
 	}
-	
-	
 
-}	
+
+}
+
+
+

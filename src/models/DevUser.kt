@@ -17,13 +17,24 @@ class DevUser : User {
 
 	fun returnProfile() {
 
-		println("Name: $name")
-		println("Credits: $credits")
-		println("Projects: [")
+		println("{")
+		println("'Name': '$name',")
+		println("'Credits': '$credits',")
+		println("'Projects': [")
 		for (i in 0..projects.size - 1) {
-			println(projects.get(i).id.toString() + "-" + projects.get(i).name + "|" + projects.get(i).language)
+			var project: Project = projects.get(i)
+
+			println("{")
+			println("'id': " + project.id.toString() + ",")
+			println("'name': " + "'" + project.name + "',")
+			println("'language': " + "'" + project.language+ "',")
+
+
+			println("},")
+
 		}
 		println("]")
+		println("}")
 
 
 	}

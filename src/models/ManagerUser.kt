@@ -16,4 +16,41 @@ class ManagerUser : User {
 
 	}
 
+	fun returnProfile() {
+
+		println("{")
+		println("'Name': '$name',")
+		println("'Credits': '$credits',")
+		println("'Projects': [")
+		for (i in 0..projects.size - 1) {
+			var project: Project = projects.get(i)
+
+			println("{")
+			println("'id': " + project.id.toString() + ",")
+			println("'name': " + "'" + project.name + "',")
+			println("'language': " + "'" + project.language + "',")
+
+
+			println("},")
+
+		}
+		println("]")
+
+		println("'Devs': [")
+		for (i in 0..devs.size - 1) {
+			var dev: DevUser = devs.get(i)
+
+			println("{")
+			println("'id': " + dev.id.toString() + ",")
+			println("'name': " + "'" + dev.name + "',")
+
+			println("},")
+
+		}
+		println("]")
+		println("}")
+
+
+	}
+
 }

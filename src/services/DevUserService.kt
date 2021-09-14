@@ -9,7 +9,6 @@ class DevUserService {
 
 		var devUser: DevUser = DevUser()
 
-		println("First of all, you need to create your account: ")
 
 		println("Type your name: ")
 		var name: String = readLine()!!.toString()

@@ -15,13 +15,13 @@ fun main() {
 	println("Do you wanna log in as a Dev (1) or as a Manager (2)?")
 	var op: Int = readLine()!!.toInt();
 
+	println("First of all, you need to create your account: ")
+
 	if (op == 1) {
-		println("First of all, you need to create your account: ")
 		devLogged = devService.createDevUser()
 		devPainel(devLogged)
 	}
 	if (op == 2) {
-		println("First of all, you need to create your account: ")
 		managerLogged = managerService.createManagerUser()
 		managerPainel(managerLogged)
 	}
@@ -39,10 +39,12 @@ fun devPainel(devUser: DevUser) {
 		println("Exit (4)")
 		op = readLine()!!.toInt()
 
+		when (op) {
+			1 -> devService.createProject(devUser)
+			2 -> devService.createProject(devUser)
+			3 -> devUser.returnProfile()
+		}
 
-		if (op == 1) devService.createProject(devUser)
-		if (op == 2) devService.deleteProject(devUser)
-		if (op == 3) devUser.returnProfile();
 	}
 
 
@@ -52,17 +54,23 @@ fun managerPainel(managerUser: ManagerUser) {
 	var op: Int = 0;
 	var managerService: ManagerUserService = ManagerUserService()
 
-	while (op != 4) {
+	while (op != 6) {
 		println("Create project (1)")
 		println("Delete project (2)")
-		println("See my profile (3)")
-		println("Exit (4)")
+		println("Change my credits (3)")
+		println("Change my dev's credits (4)")
+		println("See my profile (5)")
+		println("Exit (6)")
 		op = readLine()!!.toInt()
 
+		when (op) {
+			// 1 -> managerService.createProject(managerUser)
+			// 2 -> managerService.deleteProject(managerUser)
+			3 -> managerService.changeOwnCredits(managerUser)
+			4 -> managerService.changeDevsCredits(managerUser)
+			5 -> managerUser.returnProfile()
+		}
 
-		// if (op == 1) managerService.createProject(managerUser)
-		// if (op == 2) managerService.deleteProject(managerUser)
-		if (op == 3) managerUser.returnProfile();
 	}
 
 

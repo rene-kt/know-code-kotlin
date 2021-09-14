@@ -43,6 +43,7 @@ class ManagerUser : User {
 			println("{")
 			println("'id': " + dev.id.toString() + ",")
 			println("'name': " + "'" + dev.name + "',")
+			println("'credits': " + "'" + dev.credits.toString() + "'")
 
 			println("},")
 

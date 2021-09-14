@@ -15,7 +15,7 @@ class ManagerUser : User {
 		this.projects.addAll(projects)
 
 	}
-
+	
 	fun returnProfile() {
 
 		println("{")

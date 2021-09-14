@@ -19,16 +19,16 @@ fun main() {
 
 	if (op == 1) {
 		devLogged = devService.createDevUser()
-		devPainel(devLogged)
+		devDashboard(devLogged)
 	}
 	if (op == 2) {
 		managerLogged = managerService.createManagerUser()
-		managerPainel(managerLogged)
+		managerDashboard(managerLogged)
 	}
 }
 
 
-fun devPainel(devUser: DevUser) {
+fun devDashboard(devUser: DevUser) {
 	var op: Int = 0;
 	var devService: DevUserService = DevUserService()
 
@@ -50,7 +50,7 @@ fun devPainel(devUser: DevUser) {
 
 }
 
-fun managerPainel(managerUser: ManagerUser) {
+fun managerDashboard(managerUser: ManagerUser) {
 	var op: Int = 0;
 	var managerService: ManagerUserService = ManagerUserService()
 

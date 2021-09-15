@@ -34,7 +34,7 @@ class DevUserService {
 
 
 				// A way to iterate the projects entity and incremeting 1 into their id's
-				project.id = devUser.projects.size + 1;
+				project.id = returnTheIdOfProject(devUser)
 				devUser.projects.add(project);
 
 
@@ -63,7 +63,7 @@ class DevUserService {
 		var project: Project = Project(name, language)
 
 		// A way to iterate the projects entity and incremeting 1 into their id's
-		project.id = user.projects.size + 1;
+		project.id = returnTheIdOfProject(user)
 		user.projects.add(project);
 
 	}
@@ -74,17 +74,34 @@ class DevUserService {
 		var projectId: Int = readLine()!!.toInt()
 
 		try {
-			user.projects.removeAt(projectId - 1)
+			var project: Project = user.projects.single { it.id == projectId }
+			user.projects.remove(project)
 
-			// Avoid the duplicate IDs after the delete
-			for (i in projectId - 1..user.projects.size - 1) {
-				user.projects.get(i).id -= 1;
-			}
 		} catch (e: IndexOutOfBoundsException) {
+			println("This project ID does not exist")
+		} catch (e: NoSuchElementException) {
 			println("This project ID does not exist")
 		}
 
 	}
 
+
+	
+	fun returnTheIdOfProject(user: DevUser): Int {
+		var id: Int = 1;
+
+		for (i in 1..user.projects.size) {
+
+			try {
+				user.projects.single { it.id == i }
+				id = i + 1;
+		// TODO: get only the correct exception
+			} catch (e: Exception) {
+				return i;
+			}
+		}
+
+		return id;
+	}
 
 }

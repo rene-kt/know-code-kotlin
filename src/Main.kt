@@ -41,7 +41,7 @@ fun devDashboard(devUser: DevUser) {
 
 		when (op) {
 			1 -> devService.createProject(devUser)
-			2 -> devService.createProject(devUser)
+			2 -> devService.deleteProject(devUser)
 			3 -> devUser.returnProfile()
 		}
 

@@ -25,9 +25,9 @@ class DevUser : User {
 			var project: Project = projects.get(i)
 
 			println("{")
-			println("'id': " + project.id.toString() + ",")
-			println("'name': " + "'" + project.name + "',")
-			println("'language': " + "'" + project.language+ "',")
+			println("'Id': " + project.id.toString() + ",")
+			println("'Name': " + "'" + project.name + "',")
+			println("'Language': " + "'" + project.language+ "',")
 
 
 			println("},")

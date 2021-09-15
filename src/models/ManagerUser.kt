@@ -26,9 +26,9 @@ class ManagerUser : User {
 			var project: Project = projects.get(i)
 
 			println("{")
-			println("'id': " + project.id.toString() + ",")
-			println("'name': " + "'" + project.name + "',")
-			println("'language': " + "'" + project.language + "',")
+			println("'Id': " + project.id.toString() + ",")
+			println("'Name': " + "'" + project.name + "',")
+			println("'Language': " + "'" + project.language + "',")
 
 
 			println("},")
@@ -41,9 +41,9 @@ class ManagerUser : User {
 			var dev: DevUser = devs.get(i)
 
 			println("{")
-			println("'id': " + dev.id.toString() + ",")
-			println("'name': " + "'" + dev.name + "',")
-			println("'credits': " + "'" + dev.credits.toString() + "'")
+			println("'Id': " + dev.id.toString() + ",")
+			println("'Name': " + "'" + dev.name + "',")
+			println("'Credits': " + "'" + dev.credits.toString() + "'")
 
 			println("},")
 

@@ -78,12 +78,11 @@ class ManagerUserService {
 	fun findDevById(manager: ManagerUser, id: Int): DevUser {
 		var dev: DevUser = DevUser()
 		try {
-			dev = manager.devs.get(id - 1)
-			return dev
-		} catch (e: IndexOutOfBoundsException) {
+			return manager.devs.single { it.id == id }
+		} catch (e: NoSuchElementException) {
 			println("This ID does not exist")
+			return dev;
 		}
-		return dev
 	}
 
 

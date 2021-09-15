@@ -76,9 +76,6 @@ class DevUserService {
 		try {
 			var project: Project = user.projects.single { it.id == projectId }
 			user.projects.remove(project)
-
-		} catch (e: IndexOutOfBoundsException) {
-			println("This project ID does not exist")
 		} catch (e: NoSuchElementException) {
 			println("This project ID does not exist")
 		}
@@ -86,7 +83,6 @@ class DevUserService {
 	}
 
 
-	
 	fun returnTheIdOfProject(user: DevUser): Int {
 		var id: Int = 1;
 
@@ -95,8 +91,7 @@ class DevUserService {
 			try {
 				user.projects.single { it.id == i }
 				id = i + 1;
-		// TODO: get only the correct exception
-			} catch (e: Exception) {
+			} catch (e: NoSuchElementException) {
 				return i;
 			}
 		}

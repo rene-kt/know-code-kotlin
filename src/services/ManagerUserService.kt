@@ -84,6 +84,17 @@ class ManagerUserService {
 			return dev;
 		}
 	}
+	
+	fun findProjectById(manager: ManagerUser, id: Int): Project {
+		var project: Project = Project()
+		try {
+			return manager.projects.single { it.id == id }
+		} catch (e: NoSuchElementException) {
+			println("This ID does not exist")
+			return project;
+		}
+	}
+
 
 
 	fun changeOwnCredits(manager: ManagerUser) {
@@ -147,22 +158,26 @@ class ManagerUserService {
 	}
 
 
-	fun createProject(manager: ManagerUser, project: Project) {
+	fun createProject(manager: ManagerUser) {
 
-		// A way to iterate the projects entity and incremeting 1 into their id's
+		var project: Project = Project()
+		
+		println("Type the name of the project: ")
+		project.name = readLine()!!.toString()
+		
+		println("Type the language of the product: ")
+		project.language = readLine()!!.toString()
+		
 		project.id = returnTheIdOfProject(manager)
-		manager.projects.add(project);
+		manager.projects.add(project)
+
 
 	}
 
-	fun deleteProject(manager: ManagerUser, projectId: Int) {
-		manager.projects.removeAt(projectId - 1)
-
-
-		// Avoid the duplicate IDs after the delete
-		for (i in projectId - 1..manager.projects.size - 1) {
-			manager.projects.get(i).id -= 1;
-		}
+	fun deleteProject(manager: ManagerUser) {
+		println("Type the ID of project that you want to delete: ")
+		var projectId: Int = readLine()!!.toInt()
+		manager.projects.remove(findProjectById(manager, projectId))
 	}
 	
 	fun createDev(manager: ManagerUser){

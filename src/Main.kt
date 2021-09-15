@@ -66,8 +66,8 @@ fun managerDashboard(managerUser: ManagerUser) {
 		op = readLine()!!.toInt()
 
 		when (op) {
-			// 1 -> managerService.createProject(managerUser)
-			// 2 -> managerService.deleteProject(managerUser)
+			1 -> managerService.createProject(managerUser)
+			2 -> managerService.deleteProject(managerUser)
 			3 -> managerService.createDev(managerUser)
 			4 -> managerService.deleteDev(managerUser)
 			5 -> managerService.changeOwnCredits(managerUser)

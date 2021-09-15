@@ -150,7 +150,7 @@ class ManagerUserService {
 	fun createProject(manager: ManagerUser, project: Project) {
 
 		// A way to iterate the projects entity and incremeting 1 into their id's
-		project.id = manager.projects.size + 1;
+		project.id = returnTheIdOfProject(manager)
 		manager.projects.add(project);
 
 	}
@@ -164,6 +164,53 @@ class ManagerUserService {
 			manager.projects.get(i).id -= 1;
 		}
 	}
+	
+	fun createDev(manager: ManagerUser){
+		var devService: DevUserService = DevUserService()
+		var dev: DevUser
+		
+		dev = devService.createDevUser()
+		dev.id = returnTheIdOfDevs(manager)
+		manager.devs.add(dev)
+	}
+	
+	fun deleteDev(manager: ManagerUser){
+		println("Type the ID of the dev that you want to delete: ")
+		var devId: Int = readLine()!!.toInt()
+		manager.devs.remove(findDevById(manager, devId))
+	}
+	
+	
+	fun returnTheIdOfProject(user: ManagerUser): Int {
+		var id: Int = 1;
 
+		for (i in 1..user.projects.size) {
+
+			try {
+				user.projects.single { it.id == i }
+				id = i + 1;
+			} catch (e: NoSuchElementException) {
+				return i;
+			}
+		}
+
+		return id;
+	}
+	
+		fun returnTheIdOfDevs(user: ManagerUser): Int {
+		var id: Int = 1;
+
+		for (i in 1..user.devs.size) {
+
+			try {
+				user.devs.single { it.id == i }
+				id = i + 1;
+			} catch (e: NoSuchElementException) {
+				return i;
+			}
+		}
+
+		return id;
+	}
 
 }

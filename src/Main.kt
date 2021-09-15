@@ -57,18 +57,22 @@ fun managerDashboard(managerUser: ManagerUser) {
 	while (op != 6) {
 		println("Create project (1)")
 		println("Delete project (2)")
-		println("Change my credits (3)")
-		println("Change my dev's credits (4)")
-		println("See my profile (5)")
-		println("Exit (6)")
+		println("Create developer (3)")
+		println("Delete developer (4)")
+		println("Change my credits (5)")
+		println("Change my dev's credits (6)")
+		println("See my profile (7)")
+		println("Exit (8)")
 		op = readLine()!!.toInt()
 
 		when (op) {
 			// 1 -> managerService.createProject(managerUser)
 			// 2 -> managerService.deleteProject(managerUser)
-			3 -> managerService.changeOwnCredits(managerUser)
-			4 -> managerService.changeDevsCredits(managerUser)
-			5 -> managerUser.returnProfile()
+			3 -> managerService.createDev(managerUser)
+			4 -> managerService.deleteDev(managerUser)
+			5 -> managerService.changeOwnCredits(managerUser)
+			6 -> managerService.changeDevsCredits(managerUser)
+			7 -> managerUser.returnProfile()
 		}
 
 	}

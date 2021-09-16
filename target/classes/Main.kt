@@ -5,31 +5,26 @@ import services.DevUserService
 import services.ManagerUserService
 
 fun main() {
-	try {
-		val devService: DevUserService = DevUserService()
-		val managerService: ManagerUserService = ManagerUserService()
 
-		var devLogged: DevUser
-		var managerLogged: ManagerUser
+	val devService: DevUserService = DevUserService()
+	val managerService: ManagerUserService = ManagerUserService()
 
-		println("Do you wanna log in as a Dev (1) or as a Manager (2)?")
-		var op: Int = readLine()!!.toInt();
+	var devLogged: DevUser
+	var managerLogged: ManagerUser
 
-		println("First of all, you need to create your account: ")
+	println("Do you wanna log in as a Dev (1) or as a Manager (2)?")
+	var op: Int = readLine()!!.toInt();
 
-		if (op == 1) {
-			devLogged = devService.createUser()
-			devDashboard(devLogged)
-		}
-		if (op == 2) {
-			managerLogged = managerService.createUser()
-			managerDashboard(managerLogged)
-		}
-	} catch (e: NumberFormatException) {
-		println("The program ended because you typed an invalid value!")
-		
+	println("First of all, you need to create your account: ")
+
+	if (op == 1) {
+		devLogged = devService.createDevUser()
+		devDashboard(devLogged)
 	}
-
+	if (op == 2) {
+		managerLogged = managerService.createManagerUser()
+		managerDashboard(managerLogged)
+	}
 }
 
 
@@ -59,7 +54,7 @@ fun managerDashboard(managerUser: ManagerUser) {
 	var op: Int = 0;
 	var managerService: ManagerUserService = ManagerUserService()
 
-	while (op != 8) {
+	while (op != 6) {
 		println("Create project (1)")
 		println("Delete project (2)")
 		println("Create developer (3)")

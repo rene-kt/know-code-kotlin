@@ -5,15 +5,18 @@ import models.ManagerUser
 import models.DevUser
 import models.Project
 
-class ManagerUserService : AbstractService() {
+class ManagerUserService {
 
-	fun createUser(): ManagerUser {
 
-		var user: ManagerUser = ManagerUser()
-		
+	fun createManagerUser(): ManagerUser {
+
+		var managerUser: ManagerUser = ManagerUser()
+		var devService: DevUserService = DevUserService()
+
+
 		println("Type your name: ")
 		var name: String = readLine()!!.toString()
-		user.name = name;
+		managerUser.name = name;
 
 		println("Do you have any projects? Yes (1) No (2)")
 		var op: Int = readLine()!!.toInt()
@@ -25,16 +28,20 @@ class ManagerUserService : AbstractService() {
 
 			while (operation == 1) {
 
-				var project: Project = Project()
-
 				println("Type the name of the project: ")
-				project.name = readLine()!!.toString()
+				var projectName: String = readLine()!!.toString()
 
 				println("Type the language of the project: ")
-				project.language = readLine()!!.toString()
+				var projectLanguage: String = readLine()!!.toString()
 
-				project.id = user.projects.size + 1;
-				user.projects.add(project);
+				var project: Project = Project(projectName, projectLanguage)
+
+
+				// A way to iterate the projects entity and incremeting 1 into their id's
+				project.id = managerUser.projects.size + 1;
+				managerUser.projects.add(project);
+
+
 
 				println("Do you still have projects? Yes (1) No (2)")
 				operation = readLine()!!.toInt()
@@ -51,25 +58,23 @@ class ManagerUserService : AbstractService() {
 
 
 		if (operation == 1) {
-			var option: Int = 1;
+			var option: Int = 0;
 
-			while (option == 1) {
-				
-				var devService: DevUserService = DevUserService()
-				var devUser: DevUser = devService.createUser()
+			while (option != 2) {
+				var devUser: DevUser = devService.createDevUser()
 
-				devUser.id = user.devs.size + 1;
-				user.devs.add(devUser);
+				devUser.id = managerUser.devs.size + 1;
+				managerUser.devs.add(devUser);
 
 				println("Do you still have devs? Yes (1) No (2)")
 				option = readLine()!!.toInt()
 			}
 
-		} 
+		}
 
-		return user;
+		return managerUser;
 	}
-	
+
 	fun findDevById(manager: ManagerUser, id: Int): DevUser {
 		var dev: DevUser = DevUser()
 		try {
@@ -79,6 +84,17 @@ class ManagerUserService : AbstractService() {
 			return dev;
 		}
 	}
+	
+	fun findProjectById(manager: ManagerUser, id: Int): Project {
+		var project: Project = Project()
+		try {
+			return manager.projects.single { it.id == id }
+		} catch (e: NoSuchElementException) {
+			println("This ID does not exist")
+			return project;
+		}
+	}
+
 
 
 	fun changeOwnCredits(manager: ManagerUser) {
@@ -141,22 +157,62 @@ class ManagerUserService : AbstractService() {
 
 	}
 
-	fun createDev(manager: ManagerUser) {
+
+	fun createProject(manager: ManagerUser) {
+
+		var project: Project = Project()
+		
+		println("Type the name of the project: ")
+		project.name = readLine()!!.toString()
+		
+		println("Type the language of the product: ")
+		project.language = readLine()!!.toString()
+		
+		project.id = returnTheIdOfProject(manager)
+		manager.projects.add(project)
+
+
+	}
+
+	fun deleteProject(manager: ManagerUser) {
+		println("Type the ID of project that you want to delete: ")
+		var projectId: Int = readLine()!!.toInt()
+		manager.projects.remove(findProjectById(manager, projectId))
+	}
+	
+	fun createDev(manager: ManagerUser){
 		var devService: DevUserService = DevUserService()
 		var dev: DevUser
-
-		dev = devService.createUser()
+		
+		dev = devService.createDevUser()
 		dev.id = returnTheIdOfDevs(manager)
 		manager.devs.add(dev)
 	}
-
-	fun deleteDev(manager: ManagerUser) {
+	
+	fun deleteDev(manager: ManagerUser){
 		println("Type the ID of the dev that you want to delete: ")
 		var devId: Int = readLine()!!.toInt()
 		manager.devs.remove(findDevById(manager, devId))
 	}
+	
+	
+	fun returnTheIdOfProject(user: ManagerUser): Int {
+		var id: Int = 1;
 
-	fun returnTheIdOfDevs(user: ManagerUser): Int {
+		for (i in 1..user.projects.size) {
+
+			try {
+				user.projects.single { it.id == i }
+				id = i + 1;
+			} catch (e: NoSuchElementException) {
+				return i;
+			}
+		}
+
+		return id;
+	}
+	
+		fun returnTheIdOfDevs(user: ManagerUser): Int {
 		var id: Int = 1;
 
 		for (i in 1..user.devs.size) {

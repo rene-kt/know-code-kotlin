@@ -33,7 +33,7 @@ class DevUser : User {
 					println("},")
 		
 				}
-			println("]")
+			println("],")
 		
 		println("}")
 

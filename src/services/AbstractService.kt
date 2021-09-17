@@ -6,10 +6,7 @@ import models.User
 
 open class AbstractService {
 
-	
-
 	fun createProject(user: User) {
-
 
 		println("Type the name of the project: ")
 		var name: String = readLine()!!.toString()
@@ -19,7 +16,6 @@ open class AbstractService {
 
 		var project: Project = Project(name, language)
 
-		// A way to iterate the projects entity and incremeting 1 into their id's
 		project.id = returnTheIdOfProject(user)
 		user.projects.add(project);
 
